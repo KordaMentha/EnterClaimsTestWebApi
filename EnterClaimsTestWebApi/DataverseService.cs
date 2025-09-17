@@ -28,7 +28,7 @@ namespace EnterClaimsTestWebApi
             var httpClient = new HttpClient();
             httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.Token);
 
-            var response = await httpClient.GetAsync($"{dataverseUrl}/api/data/v9.2/bsbs");
+            var response = await httpClient.GetAsync($"{dataverseUrl}/api/data/v9.2/km_bsbs");
             return await response.Content.ReadAsStringAsync();
         }
 
