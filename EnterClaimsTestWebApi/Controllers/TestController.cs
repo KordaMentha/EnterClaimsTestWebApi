@@ -10,7 +10,7 @@ namespace EnterClaimsTestWebApi.Controllers
         [HttpGet("SimpleTest")]
         public IActionResult SimpleTest()
         {
-            string[] testCodes = new string[] { "123456", "654321", "111222", "333444", "999999", "817543" };
+            string[] testCodes = new string[] { "123456", "654321", "111222", "333444", "999999", "1098765" };
             return Ok(testCodes);
         }
 
