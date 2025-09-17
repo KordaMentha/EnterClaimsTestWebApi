@@ -1,0 +1,34 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "EnterClaimsTestWebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/api/EnterClaimsTest/GetBSBs": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Test/SimpleTest": {
+      "get": {
+        "tags": [
+          "Test"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "components": { }
+}

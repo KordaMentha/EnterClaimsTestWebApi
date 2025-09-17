@@ -1,0 +1,22 @@
+[
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetAllBSBs",
+    "RelativePath": "api/EnterClaimsTest/GetBSBs",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.TestController",
+    "Method": "SimpleTest",
+    "RelativePath": "api/Test/SimpleTest",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  }
+]
