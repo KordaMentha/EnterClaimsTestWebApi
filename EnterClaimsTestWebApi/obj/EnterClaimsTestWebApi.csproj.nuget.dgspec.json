@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApiSln\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj": {}
+    "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApiSln\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj": {
+    "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApiSln\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
+        "projectUniqueName": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
         "projectName": "EnterClaimsTestWebApi",
-        "projectPath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApiSln\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
+        "projectPath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
         "packagesPath": "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApiSln\\EnterClaimsTestWebApi\\obj\\",
+        "outputPath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",

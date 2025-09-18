@@ -7,8 +7,8 @@ namespace EnterClaimsTestWebApi.Controllers
     [ApiController]
     public class EnterClaimsTestController : ControllerBase
     {
-        private readonly DataverseService _dataverseService;
-        public EnterClaimsTestController(DataverseService dataverseService)
+        private readonly DataService _dataverseService;
+        public EnterClaimsTestController(DataService dataverseService)
         {
             _dataverseService = dataverseService;
         }
