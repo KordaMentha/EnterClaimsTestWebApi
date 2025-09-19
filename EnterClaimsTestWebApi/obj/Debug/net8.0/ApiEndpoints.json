@@ -2,7 +2,7 @@
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
     "Method": "GetBSBAsync",
-    "RelativePath": "api/EnterClaimsTest/GetAllBSBs1",
+    "RelativePath": "api/EnterClaimsTest/GetBSBs",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -11,8 +11,8 @@
   },
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetAllBSBs",
-    "RelativePath": "api/EnterClaimsTest/GetAllBSBs2",
+    "Method": "GetContacts",
+    "RelativePath": "api/EnterClaimsTest/GetContacts",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

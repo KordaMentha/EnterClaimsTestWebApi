@@ -9,9 +9,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddScoped<DataService>();
-
-
 // Add CORS policy. NOT For PRODUCTION USE. For testing purposes only.
 builder.Services.AddCors(options =>
 {

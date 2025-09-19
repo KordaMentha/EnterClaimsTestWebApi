@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/EnterClaimsTest/GetAllBSBs1": {
+    "/api/EnterClaimsTest/GetBSBs": {
       "get": {
         "tags": [
           "EnterClaimsTest"
@@ -17,7 +17,7 @@
         }
       }
     },
-    "/api/EnterClaimsTest/GetAllBSBs2": {
+    "/api/EnterClaimsTest/GetContacts": {
       "get": {
         "tags": [
           "EnterClaimsTest"
