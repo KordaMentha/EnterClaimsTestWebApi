@@ -34,7 +34,8 @@ namespace EnterClaimsTestWebApi.Controllers
             string clientId = Environment.GetEnvironmentVariable("SamTestClaims_clientID").ToString();
             string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString();
             string clientSecret = Environment.GetEnvironmentVariable("SamTestClaims_clientsecret").ToString();
-            string apiUrl = "https://tectestimportsolution-dev.crm6.dynamics.com/api/data/v9.2/km_bsbs";
+            string apiUrl =  Environment.GetEnvironmentVariable("SamTestClaims_apiURL").ToString() + "/km_bsbs";
+            //string apiUrl = "https://tectestimportsolution-dev.crm6.dynamics.com/api/data/v9.2/km_bsbs";
 
             string token = await GetAccessTokenAsync(clientId, tenantId, clientSecret);
 
@@ -56,7 +57,8 @@ namespace EnterClaimsTestWebApi.Controllers
             string clientId = Environment.GetEnvironmentVariable("SamTestClaims_clientID").ToString();
             string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString();
             string clientSecret = Environment.GetEnvironmentVariable("SamTestClaims_clientsecret").ToString();
-            string apiUrl = "https://tectestimportsolution-dev.crm6.dynamics.com/api/data/v9.2/contacts";
+            string apiUrl = Environment.GetEnvironmentVariable("SamTestClaims_apiURL").ToString() + "/contacts";
+            //string apiUrl = "https://tectestimportsolution-dev.crm6.dynamics.com/api/data/v9.2/contacts";
 
             string token = await GetAccessTokenAsync(clientId, tenantId, clientSecret);
 
