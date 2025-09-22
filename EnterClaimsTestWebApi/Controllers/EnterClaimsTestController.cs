@@ -52,6 +52,30 @@ namespace EnterClaimsTestWebApi.Controllers
             //var response = await httpClient.GetAsync(apiUrl);
             //return await response.Content.ReadAsStringAsync();
         }
+        [HttpGet("GetAccounts")]
+        public async Task<IActionResult> GetAccounts()
+        {
+            string clientId = Environment.GetEnvironmentVariable("SamTestClaims_clientID").ToString();
+            string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString();
+            string clientSecret = Environment.GetEnvironmentVariable("SamTestClaims_clientsecret").ToString();
+            //string apiUrl = Environment.GetEnvironmentVariable("SamTestClaims_Scope").ToString() + "data/v9.2/contacts";
+            string apiUrl = "https://tectestimportsolution-dev.crm6.dynamics.com/api/data/v9.2/accounts";
+
+            string token = await GetAccessTokenAsync(clientId, tenantId, clientSecret);
+
+            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            var clientResponse = httpClient.SendAsync(request).Result;
+            return Ok(await clientResponse.Content.ReadAsStringAsync());
+
+            //using var httpClient = new HttpClient();
+            //httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+            //httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+            //var response = await httpClient.GetAsync(apiUrl);
+            //return await response.Content.ReadAsStringAsync();
+        }
+
         [HttpGet("GetContacts")]
         public async Task<IActionResult> GetContacts()
         {
