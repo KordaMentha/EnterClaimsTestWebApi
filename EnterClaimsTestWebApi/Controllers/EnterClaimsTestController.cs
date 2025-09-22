@@ -23,7 +23,7 @@ namespace EnterClaimsTestWebApi.Controllers
                 .WithAuthority(new Uri($"https://login.microsoftonline.com/{tenantId}"))
                 .Build();
 
-            string[] scopes = new[] { Environment.GetEnvironmentVariable("SamTestClaims_Scope") + ".default" };
+            string[] scopes = new[] { Environment.GetEnvironmentVariable("SamTestClaims_Scope").ToString() + ".default" };
             var result = await app.AcquireTokenForClient(scopes).ExecuteAsync();
             return result.AccessToken;
         }
