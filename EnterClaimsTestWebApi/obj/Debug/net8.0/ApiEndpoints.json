@@ -1,16 +1,6 @@
 [
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetAccounts",
-    "RelativePath": "api/EnterClaimsTest/GetAccounts",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
     "Method": "GetBSBs",
     "RelativePath": "api/EnterClaimsTest/GetBSBs",
     "HttpMethod": "GET",
@@ -21,28 +11,8 @@
   },
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetContacts",
-    "RelativePath": "api/EnterClaimsTest/GetContacts",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetCoreData",
-    "RelativePath": "api/EnterClaimsTest/GetCoreData",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetCoreDataForUser",
-    "RelativePath": "api/EnterClaimsTest/GetCoreDataForUser",
+    "Method": "GetCoreDataVerifyUser",
+    "RelativePath": "api/EnterClaimsTest/GetCoreDataVerifyUser",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,

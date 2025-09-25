@@ -5,7 +5,7 @@
     "version": "1.0"
   },
   "paths": {
-    "/api/EnterClaimsTest/GetCoreDataForUser": {
+    "/api/EnterClaimsTest/GetCoreDataVerifyUser": {
       "get": {
         "tags": [
           "EnterClaimsTest"
@@ -40,43 +40,7 @@
         }
       }
     },
-    "/api/EnterClaimsTest/GetCoreData": {
-      "get": {
-        "tags": [
-          "EnterClaimsTest"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
     "/api/EnterClaimsTest/GetBSBs": {
-      "get": {
-        "tags": [
-          "EnterClaimsTest"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/EnterClaimsTest/GetAccounts": {
-      "get": {
-        "tags": [
-          "EnterClaimsTest"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/EnterClaimsTest/GetContacts": {
       "get": {
         "tags": [
           "EnterClaimsTest"

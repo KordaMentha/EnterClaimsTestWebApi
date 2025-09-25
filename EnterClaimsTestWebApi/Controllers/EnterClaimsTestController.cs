@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
 using Newtonsoft.Json;
@@ -20,6 +21,7 @@ namespace EnterClaimsTestWebApi.Controllers
             _service = dataService;
         }
 
+        //[Authorize(Policy = "Api.Read")]
         [HttpGet("GetCoreDataVerifyUser")]
         public async Task<IActionResult> GetCoreDataVerifyUser(string empID, string DOB, string last4digitsofTFN)
         {

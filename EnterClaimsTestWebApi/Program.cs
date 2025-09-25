@@ -12,16 +12,39 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 // Add CORS policy. NOT For PRODUCTION USE. For testing purposes only.
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowSpecificOrigin",
-        policy =>
-        {
-            policy.WithOrigins("https://samtestclaims.powerappsportals.com/") // Add your frontend URL
-                  .AllowAnyHeader()
-                  .AllowAnyMethod();
-        });
-});
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowSpecificOrigin",
+//        policy =>
+//        {
+//            policy.WithOrigins("https://samtestclaims.powerappsportals.com/") // Add your frontend URL
+//                  .AllowAnyHeader()
+//                  .AllowAnyMethod();
+//        });
+//});
+
+
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.Authority = $"https://login.microsoftonline.com/{tenantId}/v2.0";
+//        options.Audience = "{clientId}"; // or api://{clientId}
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = true
+//        };
+//    });
+
+
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("Api.Read", policy =>
+//        policy.RequireAssertion(context =>
+//            context.User.HasClaim(c =>
+//                (c.Type == "scp" || c.Type == "http://schemas.microsoft.com/identity/claims/scope") &&
+//                c.Value.Split(' ').Contains("api://525e6467-1c4a-4eb5-9899-a906ea5d623e/EnterClaimsTestApi"))));
+//});
+
 
 var app = builder.Build();
 
