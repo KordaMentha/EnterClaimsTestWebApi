@@ -20,33 +20,19 @@ namespace EnterClaimsTestWebApi.Controllers
             _service = dataService;
         }
 
-        [HttpGet("GetCoreDataForUser")]
-        public async Task<IActionResult> GetCoreDataForUser(string empID, string DOB, string last4digitsofTFN)
+        [HttpGet("GetCoreDataVerifyUser")]
+        public async Task<IActionResult> GetCoreDataVerifyUser(string empID, string DOB, string last4digitsofTFN)
         {
             // Convert DOB to ISO 8601 format (yyyy-MM-ddTHH:mm:ssZ)
             //string isoDOB = _service.ConvertDateToISO8601(DateTime.Parse(DOB));
-            string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/km_coredatas?$filter=km_employeeid eq '" + empID + "'" +
+            string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/km_coredatas?$select=km_coreid&$filter=km_employeeid eq '" + empID + "'" +
                 " and km_dateofbirth eq '" + DOB + "'" + " and endswith(km_tfn, '" + last4digitsofTFN + "')";
-
             string token = await _service.GetAccessToken();
             var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var clientResponse = httpClient.SendAsync(request).Result;
-            //return Ok(await clientResponse.Content.ReadAsStringAsync());
-
             var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
             return Content(jsonResponse, "application/json");
-        }
-
-        [HttpGet("GetCoreData")]
-        public async Task<IActionResult> GetCoreData()
-        {
-            string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/km_coredatas";
-            string token = await _service.GetAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var clientResponse = httpClient.SendAsync(request).Result;
-            return Ok(await clientResponse.Content.ReadAsStringAsync());
         }
 
         [HttpGet("GetBSBs")]
@@ -57,32 +43,8 @@ namespace EnterClaimsTestWebApi.Controllers
             var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var clientResponse = httpClient.SendAsync(request).Result;
-            return Ok(await clientResponse.Content.ReadAsStringAsync());
-
-        }
-
-        [HttpGet("GetAccounts")]
-        public async Task<IActionResult> GetAccounts()
-        {
-            string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/accounts";
-            string token = await _service.GetAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var clientResponse = httpClient.SendAsync(request).Result;
-            return Ok(await clientResponse.Content.ReadAsStringAsync());
-
-        }
-
-        [HttpGet("GetContacts")]
-        public async Task<IActionResult> GetContacts()
-        {
-            string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/contacts";
-            string token = await _service.GetAccessToken();
-            var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
-            var clientResponse = httpClient.SendAsync(request).Result;
-            return Ok(await clientResponse.Content.ReadAsStringAsync());
-
+            var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
+            return Content(jsonResponse, "application/json");
         }
     }
 }
