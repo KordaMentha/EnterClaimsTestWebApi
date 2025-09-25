@@ -33,5 +33,15 @@ namespace EnterClaimsTestWebApi
         {
             return _configuration["Dataverse:EnvironmentUrl"];
         }
+
+        public string ConvertDateToISO8601(DateTime dateTime)
+        {
+            // Ensure the DateTime is in UTC
+            var utcDateTime = dateTime.ToUniversalTime();
+
+            // Format as ISO 8601 with 'Z' to indicate UTC
+            return utcDateTime.ToString("yyyy-MM-dd");
+        }
+
     }
 }

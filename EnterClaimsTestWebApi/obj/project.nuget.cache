@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "qEyXDmn30BE=",
+  "dgSpecHash": "wJ5YQC5roQM=",
   "success": true,
   "projectFilePath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
   "expectedPackageFiles": [
@@ -14,6 +14,7 @@
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\microsoft.identity.client.extensions.msal\\4.76.0\\microsoft.identity.client.extensions.msal.4.76.0.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\microsoft.identitymodel.abstractions\\6.35.0\\microsoft.identitymodel.abstractions.6.35.0.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\microsoft.openapi\\1.6.14\\microsoft.openapi.1.6.14.nupkg.sha512",
+    "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\newtonsoft.json\\13.0.4\\newtonsoft.json.13.0.4.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\swashbuckle.aspnetcore\\6.6.2\\swashbuckle.aspnetcore.6.6.2.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.6.2\\swashbuckle.aspnetcore.swagger.6.6.2.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.6.2\\swashbuckle.aspnetcore.swaggergen.6.6.2.nupkg.sha512",

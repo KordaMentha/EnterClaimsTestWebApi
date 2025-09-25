@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Identity.Client;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace EnterClaimsTestWebApi.Controllers
 {
@@ -21,6 +23,8 @@ namespace EnterClaimsTestWebApi.Controllers
         [HttpGet("GetCoreDataForUser")]
         public async Task<IActionResult> GetCoreDataForUser(string empID, string DOB, string last4digitsofTFN)
         {
+            // Convert DOB to ISO 8601 format (yyyy-MM-ddTHH:mm:ssZ)
+            //string isoDOB = _service.ConvertDateToISO8601(DateTime.Parse(DOB));
             string apiUrl = _service.GetDataverseEnvironmentUrl() + "/api/data/v9.2/km_coredatas?$filter=km_employeeid eq '" + empID + "'" +
                 " and km_dateofbirth eq '" + DOB + "'" + " and endswith(km_tfn, '" + last4digitsofTFN + "')";
 
@@ -28,7 +32,10 @@ namespace EnterClaimsTestWebApi.Controllers
             var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
             var clientResponse = httpClient.SendAsync(request).Result;
-            return Ok(await clientResponse.Content.ReadAsStringAsync());
+            //return Ok(await clientResponse.Content.ReadAsStringAsync());
+
+            var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
+            return Content(jsonResponse, "application/json");
         }
 
         [HttpGet("GetCoreData")]
