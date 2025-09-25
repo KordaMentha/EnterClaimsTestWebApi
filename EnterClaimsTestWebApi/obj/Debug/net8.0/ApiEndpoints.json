@@ -1,7 +1,17 @@
 [
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
-    "Method": "GetBSBAsync",
+    "Method": "GetAccounts",
+    "RelativePath": "api/EnterClaimsTest/GetAccounts",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetBSBs",
     "RelativePath": "api/EnterClaimsTest/GetBSBs",
     "HttpMethod": "GET",
     "IsController": true,
@@ -17,6 +27,42 @@
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetCoreData",
+    "RelativePath": "api/EnterClaimsTest/GetCoreData",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetCoreDataForUser",
+    "RelativePath": "api/EnterClaimsTest/GetCoreDataForUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "last4digitsofTFN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
     "ReturnTypes": []
   },
   {

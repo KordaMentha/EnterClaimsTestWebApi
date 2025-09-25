@@ -5,7 +5,66 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/EnterClaimsTest/GetCoreDataForUser": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "empID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DOB",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last4digitsofTFN",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EnterClaimsTest/GetCoreData": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EnterClaimsTest/GetBSBs": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EnterClaimsTest/GetAccounts": {
       "get": {
         "tags": [
           "EnterClaimsTest"
