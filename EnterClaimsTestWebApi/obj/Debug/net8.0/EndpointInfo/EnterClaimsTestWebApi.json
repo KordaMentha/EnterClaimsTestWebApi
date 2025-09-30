@@ -40,6 +40,62 @@
         }
       }
     },
+    "/api/EnterClaimsTest/CheckForDuplicateClaim": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "empID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DOB",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last4digitsofTFN",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EnterClaimsTest/DeleteDuplicateClaim": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "claimID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/EnterClaimsTest/GetBSBs": {
       "get": {
         "tags": [

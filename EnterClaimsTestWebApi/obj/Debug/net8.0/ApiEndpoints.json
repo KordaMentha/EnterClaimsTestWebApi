@@ -1,6 +1,48 @@
 [
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "CheckForDuplicateClaim",
+    "RelativePath": "api/EnterClaimsTest/CheckForDuplicateClaim",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "last4digitsofTFN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "DeleteDuplicateClaim",
+    "RelativePath": "api/EnterClaimsTest/DeleteDuplicateClaim",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "claimID",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
     "Method": "GetBSBs",
     "RelativePath": "api/EnterClaimsTest/GetBSBs",
     "HttpMethod": "GET",
