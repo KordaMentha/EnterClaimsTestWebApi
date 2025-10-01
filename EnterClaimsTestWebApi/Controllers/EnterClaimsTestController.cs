@@ -177,7 +177,7 @@ namespace EnterClaimsTestWebApi.Controllers
             }
         }
 
-        //[Authorize(Policy = "Api.Read")]
+        [Authorize(Policy = "Api.Read")]
         [HttpGet("GetCoreDataVerifyUser")]
         public async Task<IActionResult> GetCoreDataVerifyUser(string empID, string DOB, string last4digitsofTFN)
         {
@@ -258,6 +258,7 @@ namespace EnterClaimsTestWebApi.Controllers
             }
         }
 
+        [Authorize(Policy = "Api.Read")]
         [HttpGet("GetBSBs")]
         public async Task<IActionResult> GetBSBs()
         {
