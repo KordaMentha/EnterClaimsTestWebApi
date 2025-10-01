@@ -5,6 +5,128 @@
     "version": "1.0"
   },
   "paths": {
+    "/api/EnterClaimsTest/GetCoreDataForUserAllFields": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "empID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DOB",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last4digitsofTFN",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EnterClaimsTest/GetClaimIDForUser": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "empID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DOB",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last4digitsofTFN",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/EnterClaimsTest/UpdateClaimForm": {
+      "get": {
+        "tags": [
+          "EnterClaimsTest"
+        ],
+        "parameters": [
+          {
+            "name": "empID",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "DOB",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "last4digitsofTFN",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/api/EnterClaimsTest/GetCoreDataVerifyUser": {
       "get": {
         "tags": [

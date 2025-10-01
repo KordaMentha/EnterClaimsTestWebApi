@@ -53,6 +53,58 @@
   },
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetClaimIDForUser",
+    "RelativePath": "api/EnterClaimsTest/GetClaimIDForUser",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "last4digitsofTFN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "GetCoreDataForUserAllFields",
+    "RelativePath": "api/EnterClaimsTest/GetCoreDataForUserAllFields",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "last4digitsofTFN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
     "Method": "GetCoreDataVerifyUser",
     "RelativePath": "api/EnterClaimsTest/GetCoreDataVerifyUser",
     "HttpMethod": "GET",
@@ -76,6 +128,42 @@
       }
     ],
     "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EnterClaimsTestWebApi.Controllers.EnterClaimsTestController",
+    "Method": "UpdateClaimForm",
+    "RelativePath": "api/EnterClaimsTest/UpdateClaimForm",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "empID",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "DOB",
+        "Type": "System.String",
+        "IsRequired": false
+      },
+      {
+        "Name": "last4digitsofTFN",
+        "Type": "System.String",
+        "IsRequired": false
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "System.String",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   },
   {
     "ContainingType": "EnterClaimsTestWebApi.Controllers.TestController",
