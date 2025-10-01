@@ -25,27 +25,27 @@ builder.Services.AddSwaggerGen();
 //        });
 //});
 
-var dataverseURL = builder.Configuration["Dataverse:EnvironmentUrl"];
+//var dataverseURL = builder.Configuration["Dataverse:EnvironmentUrl"];
 
-string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString(); //Azure AD Tenant ID 
+//string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString(); //Azure AD Tenant ID 
 
-builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-    .AddJwtBearer(options =>
-    {
-        options.Authority = $"https://login.microsoftonline.com/{tenantId}/v2.0";
-        options.Audience = "{clientId}"; // or api://{clientId}
-        options.TokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateIssuer = true
-        };
-    });
+//builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+//    .AddJwtBearer(options =>
+//    {
+//        options.Authority = $"https://login.microsoftonline.com/{tenantId}/v2.0";
+//        options.Audience = "{clientId}"; // or api://{clientId}
+//        options.TokenValidationParameters = new TokenValidationParameters
+//        {
+//            ValidateIssuer = true
+//        };
+//    });
 
-builder.Services.AddAuthorization(options =>
-{
-    options.AddPolicy("Api.Read", policy =>
-        policy.RequireClaim("scope", "https://tectestimportsolution-dev.crm6.dynamics.com/.default"));
-        //policy.RequireClaim("scope", dataverseURL+"/.default"));
-});
+//builder.Services.AddAuthorization(options =>
+//{
+//    options.AddPolicy("Api.Read", policy =>
+//        policy.RequireClaim("scope", "https://tectestimportsolution-dev.crm6.dynamics.com/.default"));
+//        //policy.RequireClaim("scope", dataverseURL+"/.default"));
+//});
 
 
 //builder.Services.AddAuthorization(options =>
