@@ -5,9 +5,12 @@ using Microsoft.Identity.Client;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Data;
+using System.Data.Common;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
+using System.Security.Claims;
 using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
@@ -57,7 +60,7 @@ namespace EnterClaimsTestWebApi.Controllers
         }
 
         [HttpGet("GetClaimIDForUser")]
-        public async Task<IActionResult> GetClaimIDForUser(string empID, string DOB, string last4digitsofTFN)
+        public async Task<string> GetClaimIDForUser(string empID, string DOB, string last4digitsofTFN)
         {
             try
             {
@@ -73,28 +76,51 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
-                    return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
+                    return ($"Dataverse API call failed: {errorContent}");
                 }
-                var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                return Ok(Content(jsonResponse, "application/json"));
+                string jsonResponse = await clientResponse.Content.ReadAsStringAsync();
+                using var jsonDoc = JsonDocument.Parse(jsonResponse);
+                var root = jsonDoc.RootElement;
+
+                if (root.TryGetProperty("value", out JsonElement valueArray) &&
+                    valueArray.ValueKind == JsonValueKind.Array &&
+                    valueArray.GetArrayLength() > 0)
+                {
+                    var firstItem = valueArray[0];
+
+                    if (firstItem.TryGetProperty("km_claimformid", out JsonElement idElement))
+                    {
+                        return idElement.GetString() ?? "km_claimformid_is_null";
+                    }
+                    else
+                    {
+                        return ("Field 'km_claimformid' not found in the first item.");
+                    }
+                }
+                else
+                {
+                    return ("No items found in 'value' array.");
+                }
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
+                return ($"Unexpected error: {ex.Message}"); // fallback
             }
         }
-
 
         [HttpGet("UpdateClaimForm")]
         public async Task<string> UpdateClaimForm(string empID, string DOB, string last4digitsofTFN)
         {
-            Guid claimID = Guid.Parse("fa6b5880-9f9d-f011-aa43-002248e21c76");
-            //string claimID = "fa6b5880-9f9d-f011-aa43-002248e21c76"; //test claim record ID to update
-            var result = await GetCoreDataForUserAllFields(empID, DOB, last4digitsofTFN) as OkObjectResult;
+            //Guid claimID = Guid.Parse("fa6b5880-9f9d-f011-aa43-002248e21c76");
+
+            string claimIDString = await GetClaimIDForUser(empID, DOB, last4digitsofTFN);
+            Guid claimID = Guid.Parse(claimIDString);
+
+            var coreDataResult = await GetCoreDataForUserAllFields(empID, DOB, last4digitsofTFN) as OkObjectResult;
             #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            if (result?.Value is DataverseResponse response && response.Value.Count != 0)
+            if (coreDataResult?.Value is DataverseResponse coreDataResponse && coreDataResponse.Value.Count != 0)
             {
-                var coreData = response.Value.First();
+                var coreData = coreDataResponse.Value.First();
 
                 var updateResult = await UpdateCoreDataInClaimFormTable(coreData, claimID);
 
