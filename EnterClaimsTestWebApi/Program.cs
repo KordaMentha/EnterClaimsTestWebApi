@@ -13,18 +13,6 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-// Add CORS policy. NOT For PRODUCTION USE. For testing purposes only.
-//builder.Services.AddCors(options =>
-//{
-//    options.AddPolicy("AllowSpecificOrigin",
-//        policy =>
-//        {
-//            policy.WithOrigins("https://samtestclaims.powerappsportals.com/") // Add your frontend URL
-//                  .AllowAnyHeader()
-//                  .AllowAnyMethod();
-//        });
-//});
-
 //var dataverseURL = builder.Configuration["Dataverse:EnvironmentUrl"];
 
 //string tenantId = Environment.GetEnvironmentVariable("SamTestClaims_tenantID").ToString(); //Azure AD Tenant ID 

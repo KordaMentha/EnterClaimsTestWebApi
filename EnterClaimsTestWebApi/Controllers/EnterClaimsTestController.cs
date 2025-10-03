@@ -22,11 +22,13 @@ namespace EnterClaimsTestWebApi.Controllers
     public class EnterClaimsTestController : ControllerBase
     {
         private static readonly HttpClient httpClient = new HttpClient();
+        private readonly ILogger<EnterClaimsTestController> _logger;
         private readonly DataService _service;
 
-        public EnterClaimsTestController(DataService dataService)
+        public EnterClaimsTestController(DataService dataService, ILogger<EnterClaimsTestController> logger)
         {
             _service = dataService;
+            _logger = logger;
         }
 
         [HttpGet("GetCoreDataForUserAllFields")]
@@ -47,7 +49,6 @@ namespace EnterClaimsTestWebApi.Controllers
                     return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
                 }
                 var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                //return Content(jsonResponse, "application/json");
                 var coreDataObject = System.Text.Json.JsonSerializer.Deserialize<DataverseResponse>(jsonResponse, new JsonSerializerOptions
                     { PropertyNameCaseInsensitive = true }
                 );
@@ -55,12 +56,13 @@ namespace EnterClaimsTestWebApi.Controllers
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
+                _logger.LogError(ex, "Error in GetCoreDataForUserAllFields");
+                return StatusCode(500, $"Unexpected error - GetCoreDataForUserAllFields: {ex.Message}"); // fallback
             }
         }
 
         [HttpGet("GetClaimIDForUser")]
-        public async Task<string> GetClaimIDForUser(string empID, string DOB, string last4digitsofTFN)
+        public async Task<IActionResult> GetClaimIDForUser(string empID, string DOB, string last4digitsofTFN)
         {
             try
             {
@@ -73,11 +75,13 @@ namespace EnterClaimsTestWebApi.Controllers
                 var request = new HttpRequestMessage(HttpMethod.Get, apiUrl);
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 var clientResponse = await httpClient.SendAsync(request);
+
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
-                    return ($"Dataverse API call failed: {errorContent}");
+                    return StatusCode(500, $"Dataverse API call failed: {errorContent}");
                 }
+
                 string jsonResponse = await clientResponse.Content.ReadAsStringAsync();
                 using var jsonDoc = JsonDocument.Parse(jsonResponse);
                 var root = jsonDoc.RootElement;
@@ -90,57 +94,84 @@ namespace EnterClaimsTestWebApi.Controllers
 
                     if (firstItem.TryGetProperty("km_claimformid", out JsonElement idElement))
                     {
-                        return idElement.GetString() ?? "km_claimformid_is_null";
+                        return Ok(idElement.GetString() ?? "km_claimformid_is_null");
                     }
                     else
                     {
-                        return ("Field 'km_claimformid' not found in the first item.");
+                        _logger.LogError("GetClaimIDForUser - Field 'km_claimformid' not found in the first item of the response.");
+                        return StatusCode(500, "GetClaimIDForUser - Field 'km_claimformid' not found in the first item.");
                     }
                 }
                 else
                 {
-                    return ("No items found in 'value' array.");
+                    _logger.LogError("GetClaimIDForUser - No items found in 'value' array of the response.");
+                    return StatusCode(500, "No items found in 'value' array.");
                 }
             }
             catch (Exception ex)
             {
-                return ($"Unexpected error: {ex.Message}"); // fallback
+                return StatusCode(500, $"Unexpected error - GetClaimIDForUser: {ex.Message}");
             }
         }
 
         [HttpGet("UpdateClaimForm")]
-        public async Task<string> UpdateClaimForm(string empID, string DOB, string last4digitsofTFN)
+        public async Task<IActionResult> UpdateClaimForm(string empID, string DOB, string last4digitsofTFN)
         {
-            //Guid claimID = Guid.Parse("fa6b5880-9f9d-f011-aa43-002248e21c76");
-
-            string claimIDString = await GetClaimIDForUser(empID, DOB, last4digitsofTFN);
-            Guid claimID = Guid.Parse(claimIDString);
-
-            var coreDataResult = await GetCoreDataForUserAllFields(empID, DOB, last4digitsofTFN) as OkObjectResult;
-            #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            if (coreDataResult?.Value is DataverseResponse coreDataResponse && coreDataResponse.Value.Count != 0)
+            try
             {
-                var coreData = coreDataResponse.Value.First();
+                var result = await GetClaimIDForUser(empID, DOB, last4digitsofTFN);
 
-                var updateResult = await UpdateCoreDataInClaimFormTable(coreData, claimID);
+                if (result is OkObjectResult okResult && okResult.Value is string claimIDString)
+                {
+                    if (Guid.TryParse(claimIDString, out Guid claimID))
+                    {
+                        var coreDataResult = await GetCoreDataForUserAllFields(empID, DOB, last4digitsofTFN);
 
-                if (updateResult is OkObjectResult okResult)
-                {
-                    return($"Success: {okResult.Value}");
-                }
-                else if (updateResult is ObjectResult errorResult)
-                {
-                    return($"Error: {errorResult.StatusCode} - {errorResult.Value}");
+                        if (coreDataResult is OkObjectResult coreOk && coreOk.Value is DataverseResponse coreDataResponse && coreDataResponse.Value.Count != 0)
+                        {
+                            var coreData = coreDataResponse.Value.First();
+
+                            var updateResult = await UpdateCoreDataInClaimFormTable(coreData, claimID);
+
+                            if (updateResult is OkObjectResult updateOk)
+                            {
+                                return Ok($"Success: {updateOk.Value}");
+                            }
+                            else if (updateResult is ObjectResult updateError)
+                            {
+                                _logger.LogError("UpdateClaimForm - Error updating claim form: {Error}", updateError.Value);
+                                return StatusCode(updateError.StatusCode ?? 500, $"Error: {updateError.Value}");
+                            }
+                            else
+                            {
+                                _logger.LogError("UpdateClaimForm - Unexpected result type from update.");
+                                return StatusCode(500, "Unexpected result type from update.");
+                            }
+                        }
+                        else
+                        {
+                            _logger.LogError("UpdateClaimForm - Core data not found or empty.");
+                            return StatusCode(500, "Core data not found or empty.");
+                        }
+                    }
+                    else
+                    {
+                        _logger.LogError("UpdateClaimForm - Invalid claim ID format: {ClaimIDString}", claimIDString);
+                        return StatusCode(500, "Invalid claim ID format.");
+                    }
                 }
                 else
                 {
-                    return("Unexpected result type.");
+                    _logger.LogError("UpdateClaimForm - Claim ID not found or response invalid.");
+                    return StatusCode(500, "Claim ID not found or response invalid.");
                 }
             }
-            #pragma warning restore CS8602 // Dereference of a possibly null reference.
-            return "User not found or data missing.";
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error in UpdateClaimForm");
+                return StatusCode(500, $"Unexpected error: {ex.Message}");
+            }
         }
-
         private async Task<IActionResult> UpdateCoreDataInClaimFormTable(CoreDataModel coreData, Guid recordId)
         {
             try
@@ -192,13 +223,14 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!response.IsSuccessStatusCode)
                 {
                     var error = await response.Content.ReadAsStringAsync();
+                    _logger.LogError("UpdateCoreDataInClaimFormTable - Failed to update record: {Error}", error);
                     return StatusCode((int)response.StatusCode, $"Failed to update record: {error}");
                 }
-
                 return Ok("Record updated successfully.");
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in UpdateCoreDataInClaimFormTable");
                 return StatusCode(500, $"Unexpected error: {ex.Message}");
             }
         }
@@ -221,13 +253,15 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
+                    _logger.LogError("GetCoreDataVerifyUser - Dataverse API call failed: {ErrorContent}", errorContent);
                     return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
                 }
                 var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                return Ok(Content(jsonResponse, "application/json"));
+                return Ok(jsonResponse);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in GetCoreDataVerifyUser");
                 return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
             }
         }
@@ -249,13 +283,15 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
+                    _logger.LogError("CheckForDuplicateClaim - Dataverse API call failed: {ErrorContent}", errorContent);
                     return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
                 }
                 var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                return Ok(Content(jsonResponse, "application/json"));
+                return Ok(jsonResponse);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in CheckForDuplicateClaim");
                 return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
             }
         }
@@ -273,13 +309,15 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
+                    _logger.LogError("DeleteDuplicateClaim - Dataverse API call failed: {ErrorContent}", errorContent);
                     return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
                 }
                 var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                return Ok(Content(jsonResponse, "application/json"));
+                return Ok(jsonResponse);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in DeleteDuplicateClaim");
                 return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
             }
         }
@@ -298,13 +336,15 @@ namespace EnterClaimsTestWebApi.Controllers
                 if (!clientResponse.IsSuccessStatusCode)
                 {
                     var errorContent = await clientResponse.Content.ReadAsStringAsync();
+                    _logger.LogError("GetBSBs - Dataverse API call failed: {ErrorContent}", errorContent);
                     return StatusCode((int)clientResponse.StatusCode, $"Dataverse API call failed: {errorContent}");
                 }
                 var jsonResponse = await clientResponse.Content.ReadAsStringAsync();
-                return Ok(Content(jsonResponse, "application/json"));
+                return Ok(jsonResponse);
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error in GetBSBs");
                 return StatusCode(500, $"Unexpected error: {ex.Message}"); // fallback
             }
         }
