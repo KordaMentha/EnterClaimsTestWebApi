@@ -180,6 +180,9 @@ namespace EnterClaimsTestWebApi.Controllers
                 {
                     km_firstname = coreData.EmployeeFirstName,
                     km_surname = coreData.EmployeeSurName,
+                    km_homephone = coreData.HomePhone,
+                    km_phonemobilenumber = coreData.MobileNumber,
+                    km_emailaddress = coreData.Email,
                     km_taxfilenumbertfn = coreData.TFN,
                     km_addressline1 = coreData.AddressLine1,
                     km_addressline2 = coreData.AddressLine2,
