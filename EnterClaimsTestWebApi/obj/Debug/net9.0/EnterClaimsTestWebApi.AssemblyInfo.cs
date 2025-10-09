@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EnterClaimsTestWebApi")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec19c4623dc259fac12e3264d55c4c83325832e5")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+b470f7bdcd6b9efc1b013c9c9a9642769f03281f")]
 [assembly: System.Reflection.AssemblyProductAttribute("EnterClaimsTestWebApi")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EnterClaimsTestWebApi")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
