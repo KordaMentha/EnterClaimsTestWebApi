@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qENK3OIFhWg=",
+  "dgSpecHash": "kVLplYjuHGc=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\NewTestClaims\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
+  "projectFilePath": "C:\\Users\\Samarth.Nagaraj\\source\\repos\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi\\EnterClaimsTestWebApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\azure.core\\1.47.3\\azure.core.1.47.3.nupkg.sha512",
     "C:\\Users\\Samarth.Nagaraj\\.nuget\\packages\\azure.identity\\1.16.0\\azure.identity.1.16.0.nupkg.sha512",
