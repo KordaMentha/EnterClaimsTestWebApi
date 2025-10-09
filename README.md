@@ -1,7 +1,8 @@
-# EnterClaimsTestWebApi
+# EnterClaimsTestWebApi help documentation
 
-Below is a Json format of API's
+The API's are hosted on Azure - https://enterclaimtestwebapi-dtfvaqfzfqe5dgc5.australiasoutheast-01.azurewebsites.net
 
+Below is a list of API's (Json)
 {
   "openapi": "3.0.1",
   "info": {
