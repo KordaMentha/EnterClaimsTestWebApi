@@ -238,7 +238,7 @@ namespace EnterClaimsTestWebApi.Controllers
             }
         }
 
-        [Authorize]
+        //[Authorize]
         [HttpGet("GetCoreDataVerifyUser")]
         public async Task<IActionResult> GetCoreDataVerifyUser(string empID, string DOB, string last4digitsofTFN)
         {
