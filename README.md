@@ -1,4 +1,7 @@
 # EnterClaimsTestWebApi
+
+Below is a Json format of API's
+
 {
   "openapi": "3.0.1",
   "info": {
